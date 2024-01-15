@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>XML HTTP Request Example</title>
+    </head>
+    <body>
+        This is for XML Parsing
+        <script>
+            //Creating an XMLHttpRequest object
+         const xhr = new XMLHttpRequest();
+            
+            const url ='https://restcountries.com/v3.1/all';
+            
+            xhr.onreadystatechange = function(){
+                
+                if(xhr.readyState === XMLHttpRequest.DONE){
+                    
+                    if(xhr.status ===200){
+                        
+                        const response =JSON.parse(xhr.responseText);
+                        var poparr =[]
+                        response.forEach(item =>{
+                            poparr.push(item.population)
+                            return
+                        });
+                        console.log(poparr)
+                        var totalPopulation =poparr.reduce((curr,acc) =>{
+                            return acc+curr
+                            
+                        });
+                        console.log(totalPopulation)
+                        
+
+                    }
+                    else{
+                        
+                        console.log('There was a problem with the request');
+                    }
+                }
+            };
+            xhr.open('GET',url, true);
+            
+            xhr.send(); 
+
+            </script>
+    </body>
+</html>
