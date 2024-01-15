@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>XML HTTP Request Example</title>
+    </head>
+    <body>
+        This is for XML Parsing
+        <script>
+         const xhr = new XMLHttpRequest();
+            
+            const url ='https://restcountries.com/v3.1/all';
+            
+            xhr.onreadystatechange = function(){
+                
+                if(xhr.readyState === XMLHttpRequest.DONE){
+                    
+                    if(xhr.status ===200){
+                        
+                        const response =JSON.parse(xhr.responseText);
+                        var result =[]
+                        var newarr =response.filter((item) =>{
+                            if(item.currencies.usd.name=="United States dollar"){
+                                result.push(item.name.common)
+                                return 
+                            }
+                            
+                        });
+                        console.log(result);                      
+                    }
+                    else{
+                        console.log('There was a problem with the request');
+                    }
+                }
+            };
+            xhr.open('GET',url, true);
+            xhr.send(); 
+
+            </script>
+    </body>
+</html>
